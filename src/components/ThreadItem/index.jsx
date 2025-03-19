@@ -1,12 +1,22 @@
+import { useNavigate } from 'react-router-dom';
+import { formatDate } from '../../utils/formatDate';
+
 function ThreadItem({ thread }) {
-    const createdAt = new Date(thread.createdAt).toLocaleDateString('id-ID', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    });
+    const navigate = useNavigate();
+    const createdAt = formatDate(thread.createdAt);
+
+    const onThreadClick = () => {
+        navigate(`/threads/${thread.id}`);
+    };
+
+    const onThreadPress = (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            navigate(`/threads/${thread.id}`);
+        }
+    };
 
     return (
-        <div className="bg-white rounded-lg shadow">
+        <div className="bg-white rounded-lg shadow" role='button' tabIndex={0} onClick={onThreadClick} onKeyDown={onThreadPress}>
             <div className="p-4">
                 <div className="flex items-center space-x-3 mb-4">
                     <div className="w-10 h-10 rounded-full bg-gray-200"></div>
