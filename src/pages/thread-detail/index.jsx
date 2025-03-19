@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
 import { useSelector, useDispatch } from 'react-redux';
-import { asyncGetThreadDetail } from '../../states/threadDetail/action';
+import { asyncGetThreadDetail, asyncCreateComment } from '../../states/threadDetail/action';
+import CommentInput from '../../components/CommentInput';
 
 function DetailThread() {
     const { id } = useParams();
@@ -53,6 +54,7 @@ function DetailThread() {
 
             <div className="mt-8">
                 <h2 className="text-2xl font-bold mb-6">Comments ({threadDetail.comments.length})</h2>
+                <CommentInput createComment={(content) => dispatch(asyncCreateComment(id, content))} />
                 <div className="space-y-6">
                     {threadDetail.comments.map((comment) => (
                         <div key={comment.id} className="bg-white rounded-lg shadow p-4">
