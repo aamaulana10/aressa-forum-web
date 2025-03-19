@@ -19,15 +19,15 @@ const api = (() => {
         return localStorage.getItem('accessToken');
     }
 
-    async function register({ id, name, password }) {
+    async function register({ name, email, password }) {
         const response = await fetch(`${BASE_URL}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id,
                 name,
+                email,
                 password,
             }),
         });
@@ -44,14 +44,14 @@ const api = (() => {
         return user;
     }
 
-    async function login({ id, password }) {
+    async function login({ email, password }) {
         const response = await fetch(`${BASE_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id,
+                email,
                 password,
             }),
         });
@@ -176,6 +176,115 @@ const api = (() => {
         }
     }
 
+    async function downVoteThread(threadId) {
+        const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/down-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
+    async function neutralizeThreadVote(threadId) {
+        const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/neutral-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
+    async function createComment(threadId, content) {
+        const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content,
+            }),
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+
+        const { data: { comment } } = responseJson;
+
+        return comment;
+    }
+
+    async function upVoteComment(threadId, commentId) {
+        const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
+    async function downVoteComment(threadId, commentId) {
+        const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
+    async function neutralizeCommentVote(threadId, commentId) {
+        const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
     return {
         putAccessToken,
         getAccessToken,
@@ -187,6 +296,12 @@ const api = (() => {
         getThreadDetail,
         createThread,
         upVoteThread,
+        downVoteThread,
+        neutralizeThreadVote,
+        createComment,
+        upVoteComment,
+        downVoteComment,
+        neutralizeCommentVote,
     };
 })();
 

@@ -1,36 +1,9 @@
 import { useState, useEffect } from 'react';
 import SideBar from '../../components/SideBar';
 import { useSelector, useDispatch } from 'react-redux';
-import { asyncGetAllThreads } from '../../states/threads/action';
+import { asyncCreateThread, asyncGetAllThreads } from '../../states/threads/action';
 import ThreadList from '../../components/ThreadList';
 import ThreadInput from '../../components/ThreadInput';
-
-const upcomingEvents = [
-    { id: 1, title: 'Apple Keynote', date: 'Fri, Aug 3 at 3:30 PM' },
-    { id: 2, title: '30 Second to Mars', date: 'Sat, Aug 4 at 11:00 AM' },
-    { id: 3, title: 'Avatar Premiere', date: 'Sun, Aug 5 at 1:30 PM' },
-    { id: 4, title: 'UX Design Course', date: 'Mon, Aug 6 at 4:00 PM' },
-    { id: 5, title: 'UI Design Course', date: 'Tue, Aug 7 at 1:00 PM' },
-];
-
-const groups = [
-    { id: 1, name: 'Nike', subscribers: '812K Subscribers', avatar: '🎯' },
-    { id: 2, name: 'Netflix', subscribers: '5.2M Subscribers', avatar: '🎬' },
-];
-
-const contacts = [
-    { id: 1, name: 'Desirae Schleifer', online: true },
-    { id: 2, name: 'Jocelyn Dias', online: true },
-    { id: 3, name: 'Marilyn Franci', online: false },
-    { id: 4, name: 'Nolan Dorwart', online: true },
-    { id: 5, name: 'Kianna George', online: false },
-    { id: 6, name: 'Helena Thornot', online: true },
-    { id: 7, name: 'Carla Westervelt', online: false },
-    { id: 8, name: 'Jaydon Torff', online: true },
-    { id: 9, name: 'Mira Curtis', online: false },
-    { id: 10, name: 'Chance Septimus', online: true },
-    { id: 11, name: 'Ashlynn Aminoff', online: false },
-];
 
 function ThreadPage() {
     const {
@@ -44,6 +17,10 @@ function ThreadPage() {
         dispatch(asyncGetAllThreads())
 
     }, [dispatch])
+
+    const onCreateThread = (title, body, category) => {
+        dispatch(asyncCreateThread({ title, body, category }));
+      }; 
 
     return (
         <div className="min-h-screen w-full flex bg-gray-50">
@@ -61,7 +38,7 @@ function ThreadPage() {
                         </svg>
                     </button>
 
-                    <ThreadInput />
+                    <ThreadInput createThread={onCreateThread} />
                     <ThreadList threads={threads} />
                 </div>
             </div>

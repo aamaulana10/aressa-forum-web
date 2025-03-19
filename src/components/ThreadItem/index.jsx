@@ -16,7 +16,7 @@ function ThreadItem({ thread }) {
     };
 
     return (
-        <div className="bg-white rounded-lg shadow" role='button' tabIndex={0} onClick={onThreadClick} onKeyDown={onThreadPress}>
+        <div className="bg-white rounded-lg shadow">
             <div className="p-4">
                 <div className="flex items-center space-x-3 mb-4">
                     <div className="w-10 h-10 rounded-full bg-gray-200"></div>
@@ -25,7 +25,7 @@ function ThreadItem({ thread }) {
                         <p className="text-sm text-gray-500">{createdAt}</p>
                     </div>
                 </div>
-                <div className="mb-2">
+                <div className="mb-2" role='button' tabIndex={0} onClick={onThreadClick} onKeyDown={onThreadPress}>
                     <h2 className="text-xl font-bold mb-2">{thread.title}</h2>
                     <p className="mb-2 text-gray-600">{thread.body}</p>
                     <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
