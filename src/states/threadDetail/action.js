@@ -1,3 +1,4 @@
+import { hideLoading, showLoading } from "react-redux-loading-bar";
 import api from "../../service/api";
 
 const ActionType = {
@@ -22,95 +23,119 @@ function getThreadDetailActionCreator(threadDetail) {
 
 function asyncGetThreadDetail(threadId) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
+        } finally {
+            dispatch(hideLoading());
         }
     };
 }
 
 function asyncCreateComment(threadId, content) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             await api.createComment(threadId, content);
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
+        } finally {
+            dispatch(hideLoading());
         }
     };
 }
 
 function asyncUpVoteThread(threadId) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             await api.upVoteThread(threadId);
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
+        } finally {
+            dispatch(hideLoading());
         }
     };
 }
 
 function asyncDownVoteThread(threadId) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             await api.downVoteThread(threadId);
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
+        } finally {
+            dispatch(hideLoading());
         }
     };
 }
 
 function asyncNeutralizeThreadVote(threadId) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             await api.neutralizeThreadVote(threadId);
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
+        } finally {
+            dispatch(hideLoading());
         }
     };
 }
 
 function asyncUpVoteComment(threadId, commentId) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             await api.upVoteComment(threadId, commentId);
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
+        } finally {
+            dispatch(hideLoading());
         }
     };
 }
 
 function asyncDownVoteComment(threadId, commentId) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             await api.downVoteComment(threadId, commentId);
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
+        } finally {
+            dispatch(hideLoading());
         }
     };
 }
 
 function asyncNeutralizeCommentVote(threadId, commentId) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             await api.neutralizeCommentVote(threadId, commentId);
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
+        } finally {
+            dispatch(hideLoading());
         }
     };
 }

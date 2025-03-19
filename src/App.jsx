@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/login'
 import RegisterPage from './pages/register'
 import { useSelector, useDispatch } from 'react-redux';
+import LoadingBar from 'react-redux-loading-bar';
 import { useEffect } from 'react';
 import ThreadPage from './pages/thread';
 import DetailThread from './pages/thread-detail';
@@ -28,6 +29,7 @@ function App() {
   if (authUser === null) {
     return (
       <>
+        <LoadingBar style={{ backgroundColor: '#2563eb', height: '3px' }} />
         <main>
           <Routes>
             <Route path="/*" element={<LoginPage />} />
@@ -40,6 +42,7 @@ function App() {
 
   return (
     <>
+      <LoadingBar style={{ backgroundColor: '#2563eb', height: '3px' }} />
       <div className="app-container">
         <main>
           <Routes>
