@@ -35,6 +35,16 @@ function asyncGetThreadDetail(threadId) {
     };
 }
 
+function createCommentActionCreator(threadId, userId) {
+    return {
+        type: ActionType.CREATE_COMMENT,
+        payload: {
+            threadId,
+            userId,
+        },
+    };
+}
+
 function asyncCreateComment(threadId, content) {
     return async (dispatch) => {
         dispatch(showLoading());
@@ -50,92 +60,171 @@ function asyncCreateComment(threadId, content) {
     };
 }
 
-function asyncUpVoteThread(threadId) {
-    return async (dispatch) => {
-        dispatch(showLoading());
+function upVoteThreadActionCreator(threadId, userId) {
+    return {
+        type: ActionType.UP_VOTE_THREAD,
+        payload: {
+            threadId,
+            userId,
+        },
+    };
+}
+
+function asyncUpVoteThread(threadId, userId) {
+    return async (dispatch, getState) => {
+        const { threadDetail } = getState();
+
+        // Optimistic update
+        dispatch(upVoteThreadActionCreator(threadId, userId));
+
         try {
             await api.upVoteThread(threadId);
-            const threadDetail = await api.getThreadDetail(threadId);
-            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
+            // Revert on failure
+            dispatch(getThreadDetailActionCreator(threadDetail));
             alert(error.message);
-        } finally {
-            dispatch(hideLoading());
         }
+    };
+}
+
+function downVoteThreadActionCreator(threadId, userId) {
+    return {
+        type: ActionType.DOWN_VOTE_THREAD,
+        payload: {
+            threadId,
+            userId,
+        },
     };
 }
 
 function asyncDownVoteThread(threadId) {
-    return async (dispatch) => {
-        dispatch(showLoading());
+    return async (dispatch, getState) => {
+        const authUser = JSON.parse(localStorage.getItem('authUser'));
+        const { threadDetail } = getState();
+
+        // Optimistic update
+        dispatch(downVoteThreadActionCreator(threadId, authUser.id));
+
         try {
             await api.downVoteThread(threadId);
-            const threadDetail = await api.getThreadDetail(threadId);
-            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
+            // Revert on failure
+            dispatch(getThreadDetailActionCreator(threadDetail));
             alert(error.message);
-        } finally {
-            dispatch(hideLoading());
         }
+    };
+}
+
+function neutralizeThreadVoteActionCreator(threadId, userId) {
+    return {
+        type: ActionType.NEUTRALIZE_THREAD_VOTE,
+        payload: {
+            threadId,
+            userId,
+        },
     };
 }
 
 function asyncNeutralizeThreadVote(threadId) {
-    return async (dispatch) => {
-        dispatch(showLoading());
+    return async (dispatch, getState) => {
+        const authUser = JSON.parse(localStorage.getItem('authUser'));
+        const { threadDetail } = getState();
+
+        // Optimistic update
+        dispatch(neutralizeThreadVoteActionCreator(threadId, authUser.id));
+
         try {
             await api.neutralizeThreadVote(threadId);
-            const threadDetail = await api.getThreadDetail(threadId);
-            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
+            // Revert on failure
+            dispatch(getThreadDetailActionCreator(threadDetail));
             alert(error.message);
-        } finally {
-            dispatch(hideLoading());
         }
     };
 }
 
-function asyncUpVoteComment(threadId, commentId) {
-    return async (dispatch) => {
-        dispatch(showLoading());
+function upVoteCommentActionCreator(threadId, commentId, userId) {
+    return {
+        type: ActionType.UP_VOTE_COMMENT,
+        payload: {
+            threadId,
+            commentId,
+            userId,
+        },
+    };
+}
+
+function asyncUpVoteComment(threadId, commentId, userId) {
+    return async (dispatch, getState) => {
+        const { threadDetail } = getState();
+
+        // Optimistic update
+        dispatch(upVoteCommentActionCreator(threadId, commentId, userId));
+
         try {
             await api.upVoteComment(threadId, commentId);
-            const threadDetail = await api.getThreadDetail(threadId);
-            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
+            // Revert on failure
+            dispatch(getThreadDetailActionCreator(threadDetail));
             alert(error.message);
-        } finally {
-            dispatch(hideLoading());
         }
+    };
+}
+
+function downVoteCommentActionCreator(threadId, commentId, userId) {
+    return {
+        type: ActionType.DOWN_VOTE_COMMENT,
+        payload: {
+            threadId,
+            commentId,
+            userId,
+        },
     };
 }
 
 function asyncDownVoteComment(threadId, commentId) {
-    return async (dispatch) => {
-        dispatch(showLoading());
+    return async (dispatch, getState) => {
+        const authUser = JSON.parse(localStorage.getItem('authUser'));
+        const { threadDetail } = getState();
+
+        // Optimistic update
+        dispatch(downVoteCommentActionCreator(threadId, commentId, authUser.id));
+
         try {
             await api.downVoteComment(threadId, commentId);
-            const threadDetail = await api.getThreadDetail(threadId);
-            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
+            // Revert on failure
+            dispatch(getThreadDetailActionCreator(threadDetail));
             alert(error.message);
-        } finally {
-            dispatch(hideLoading());
         }
     };
 }
 
+function neutralizeCommentVoteActionCreator(threadId, commentId, userId) {
+    return {
+        type: ActionType.NEUTRALIZE_COMMENT_VOTE,
+        payload: {
+            threadId,
+            commentId,
+            userId,
+        },
+    };
+}
+
 function asyncNeutralizeCommentVote(threadId, commentId) {
-    return async (dispatch) => {
-        dispatch(showLoading());
+    return async (dispatch, getState) => {
+        const authUser = JSON.parse(localStorage.getItem('authUser'));
+        const { threadDetail } = getState();
+
+        // Optimistic update
+        dispatch(neutralizeCommentVoteActionCreator(threadId, commentId, authUser.id));
+
         try {
             await api.neutralizeCommentVote(threadId, commentId);
-            const threadDetail = await api.getThreadDetail(threadId);
-            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
+            // Revert on failure
+            dispatch(getThreadDetailActionCreator(threadDetail));
             alert(error.message);
-        } finally {
-            dispatch(hideLoading());
         }
     };
 }
@@ -144,11 +233,18 @@ export {
     ActionType,
     getThreadDetailActionCreator,
     asyncGetThreadDetail,
+    createCommentActionCreator,
     asyncCreateComment,
+    upVoteThreadActionCreator,
     asyncUpVoteThread,
+    downVoteThreadActionCreator,
     asyncDownVoteThread,
+    neutralizeThreadVoteActionCreator,
     asyncNeutralizeThreadVote,
+    upVoteCommentActionCreator,
     asyncUpVoteComment,
+    downVoteCommentActionCreator,
     asyncDownVoteComment,
+    neutralizeCommentVoteActionCreator,
     asyncNeutralizeCommentVote,
 };

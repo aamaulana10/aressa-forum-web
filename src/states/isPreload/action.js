@@ -18,11 +18,16 @@ function asyncPreloadProcess() {
     return async (dispatch) => {
         try {
             // preload process
-            const authUser = await api.getOwnProfile();
-            dispatch(setAuthUserActionCreator(authUser));
+            const currentPath = window.location.pathname;
+            if (currentPath === '/register' || currentPath === '/login' || currentPath === '/') {
+                dispatch(setAuthUserActionCreator(null));
+            } else {
+                const authUser = await api.getOwnProfile();
+                dispatch(setAuthUserActionCreator(authUser));
+            }
         } catch (error) {
             // fallback process
-            alert(error.message);
+            alert(error.message)
             dispatch(setAuthUserActionCreator(null));
         } finally {
             // end preload process

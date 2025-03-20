@@ -49,6 +49,9 @@ function RegisterPage() {
                         Register
                     </button>
                 </form>
+                <p className="text-center mt-4">
+                    Aleady have an account? <a href="/" className="text-blue-500">Login here</a>
+                </p>
             </div>
         </div>
     );

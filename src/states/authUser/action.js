@@ -3,6 +3,7 @@ import api from "../../service/api";
 const ActionType = {
     SET_AUTH_USER: 'SET_AUTH_USER',
     UNSET_AUTH_USER: 'UNSET_AUTH_USER',
+    GET_AUTH_USER: 'GET_AUTH_USER',
 };
 
 function setAuthUserActionCreator(authUser) {
@@ -19,6 +20,15 @@ function unsetAuthUserActionCreator() {
         type: ActionType.UNSET_AUTH_USER,
         payload: {
             authUser: null,
+        },
+    };
+}
+
+function getAuthUserActionCreator(authUser) {
+    return {
+        type: ActionType.GET_AUTH_USER,
+        payload: {
+            authUser: authUser,
         },
     };
 }
@@ -43,6 +53,17 @@ function asyncUnsetAuthUser() {
     };
 }
 
+function asyncGetAuthUser() {
+    return async (dispatch) => {
+        try {
+            const authUser = await api.getOwnProfile();
+            dispatch(getAuthUserActionCreator(authUser));
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+}
+
 function asyncRegisterUser({ name, email, password }) {
     return async () => {
         try {
@@ -57,6 +78,8 @@ export {
     ActionType,
     setAuthUserActionCreator,
     unsetAuthUserActionCreator,
+    getAuthUserActionCreator,
+    asyncGetAuthUser,
     asyncSetAuthUser,
     asyncUnsetAuthUser,
     asyncRegisterUser,

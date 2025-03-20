@@ -41,6 +41,9 @@ function LoginPage() {
                         Login
                     </button>
                 </form>
+                <p className="text-center mt-4">
+                    Not registered? <a href="/register" className="text-blue-500">Register here</a>
+                </p>
             </div>
         </div>
     );

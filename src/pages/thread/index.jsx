@@ -4,10 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { asyncCreateThread, asyncGetAllThreads } from '../../states/threads/action';
 import ThreadList from '../../components/ThreadList';
 import ThreadInput from '../../components/ThreadInput';
+import Header from '../../components/Header';
+import { asyncUnsetAuthUser } from '../../states/authUser/action';
 
 function ThreadPage() {
     const {
         threads = [],
+        authUser = null,
     } = useSelector((states) => states)
     const [isOpen, setIsOpen] = useState(true);
 
@@ -20,7 +23,12 @@ function ThreadPage() {
 
     const onCreateThread = (title, body, category) => {
         dispatch(asyncCreateThread({ title, body, category }));
-      }; 
+    };
+
+    function onLogout() {
+        console.log('logout');
+        dispatch(asyncUnsetAuthUser());
+    }
 
     return (
         <div className="min-h-screen w-full flex bg-gray-50">
@@ -28,19 +36,12 @@ function ThreadPage() {
             <SideBar isOpen={isOpen} />
 
             <div className="flex-1 p-8">
-                <div className="mx-auto">
-                    {/* Toggle Sidebar Button */}
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="mb-4 p-2 rounded-lg hover:bg-gray-100">
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
 
-                    <ThreadInput createThread={onCreateThread} />
-                    <ThreadList threads={threads} />
-                </div>
+                <Header isOpen={isOpen} setIsOpen={setIsOpen} onLogout={onLogout} userName={authUser.name} />
+
+                <ThreadInput createThread={onCreateThread} />
+                <ThreadList threads={threads} />
+                {/* </div> */}
             </div>
 
         </div >
