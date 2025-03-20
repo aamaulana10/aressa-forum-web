@@ -27,7 +27,7 @@ function ThreadItem({ thread }) {
                 </div>
                 <div className="mb-2" role='button' tabIndex={0} onClick={onThreadClick} onKeyDown={onThreadPress}>
                     <h2 className="text-xl font-bold mb-2">{thread.title}</h2>
-                    <p className="mb-2 text-gray-600">{thread.body}</p>
+                    <p className="mb-2 text-gray-600 line-clamp-2">{thread.body}</p>
                     <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
                         #{thread.category}
                     </span>

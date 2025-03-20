@@ -19,7 +19,7 @@ function asyncPreloadProcess() {
         try {
             // preload process
             const currentPath = window.location.pathname;
-            if (currentPath === '/register' || currentPath === '/login' || currentPath === '/') {
+            if (currentPath === '/register') {
                 dispatch(setAuthUserActionCreator(null));
             } else {
                 const authUser = await api.getOwnProfile();
