@@ -1,9 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
+import { useSelector } from 'react-redux';
+import { asyncDownVoteThread, asyncNeutralizeThreadVote, asyncUpVoteThread } from '../../states/vote/action';
+import { useDispatch } from 'react-redux';
 
 function ThreadItem({ thread }) {
     const navigate = useNavigate();
     const createdAt = formatDate(thread.createdAt);
+    const {
+        authUser = null
+    } = useSelector((states) => states);
+    const dispatch = useDispatch();
 
     const onThreadClick = () => {
         navigate(`/threads/${thread.id}`);
@@ -12,6 +19,26 @@ function ThreadItem({ thread }) {
     const onThreadPress = (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
             navigate(`/threads/${thread.id}`);
+        }
+    };
+
+    const isThreadUpVoted = thread?.upVotesBy.includes(authUser.id);
+    const isThreadDownVoted = thread?.downVotesBy.includes(authUser.id);
+
+    const onThreadUpVoteClick = () => {
+        if (isThreadUpVoted) {
+            dispatch(asyncNeutralizeThreadVote(thread.id, authUser.id));
+        }
+        else {
+            dispatch(asyncUpVoteThread(thread.id, authUser.id));
+        }
+    };
+
+    const onThreadDownVoteClick = () => {
+        if (isThreadDownVoted) {
+            dispatch(asyncNeutralizeThreadVote(thread.id, authUser.id));
+        } else {
+            dispatch(asyncDownVoteThread(thread.id, authUser.id));
         }
     };
 
@@ -34,13 +61,17 @@ function ThreadItem({ thread }) {
                 </div>
                 <div className="flex items-center justify-between text-gray-500 mt-4 pt-4 border-t">
                     <div className="flex items-center space-x-4">
-                        <button className="flex items-center space-x-2">
+                        <button className={`flex items-center space-x-2 cursor-pointer ${isThreadUpVoted ? 'text-blue-500' : ''}`}
+                            onClick={onThreadUpVoteClick}
+                        >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
                             </svg>
                             <span>{thread.upVotesBy.length} upvotes</span>
                         </button>
-                        <button className="flex items-center space-x-2">
+                        <button className={`flex items-center space-x-2 cursor-pointer ${isThreadDownVoted ? 'text-blue-500' : ''}`}
+                            onClick={onThreadDownVoteClick}
+                        >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                             </svg>

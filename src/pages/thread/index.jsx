@@ -41,7 +41,6 @@ function ThreadPage() {
 
                 <ThreadInput createThread={onCreateThread} />
                 <ThreadList threads={threads} />
-                {/* </div> */}
             </div>
 
         </div >
