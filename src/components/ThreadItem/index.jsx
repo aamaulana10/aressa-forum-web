@@ -69,7 +69,7 @@ function ThreadItem({ thread }) {
                             </svg>
                             <span>{thread.upVotesBy.length} upvotes</span>
                         </button>
-                        <button className={`flex items-center space-x-2 cursor-pointer ${isThreadDownVoted ? 'text-blue-500' : ''}`}
+                        <button className={`flex items-center space-x-2 cursor-pointer ${isThreadDownVoted ? 'text-red-500' : ''}`}
                             onClick={onThreadDownVoteClick}
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

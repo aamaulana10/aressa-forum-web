@@ -4,16 +4,16 @@ import { formatDate } from '../../utils/formatDate';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     asyncGetThreadDetail,
-    asyncCreateComment,
-    asyncUpVoteThread,
-    asyncDownVoteThread,
-    asyncNeutralizeThreadVote,
-    asyncUpVoteComment,
-    asyncDownVoteComment,
-    asyncNeutralizeCommentVote
+    asyncCreateComment
 } from '../../states/threadDetail/action';
 import CommentInput from '../../components/CommentInput';
 import { asyncGetAuthUser } from '../../states/authUser/action';
+import {
+    asyncDownVoteComment,
+    asyncDownVoteThreadDetail, asyncNeutralizeCommentVote,
+    asyncNeutralizeThreadDetailVote, asyncUpVoteComment,
+    asyncUpVoteThreadDetail
+} from '../../states/vote/action';
 
 function DetailThread() {
     const { id } = useParams();
@@ -28,26 +28,40 @@ function DetailThread() {
     const isThreadDownVoted = threadDetail?.downVotesBy.includes(authUser.id);
 
     const onThreadUpVoteClick = () => {
-        if (isThreadDownVoted) {
-            dispatch(asyncNeutralizeThreadVote(id));
-        }
+        console.log('isThreadUpVoted ', isThreadUpVoted);
+
         if (isThreadUpVoted) {
-            dispatch(asyncNeutralizeThreadVote(id));
-        } else {
-            dispatch(asyncUpVoteThread(id));
+            dispatch(asyncNeutralizeThreadDetailVote(threadDetail.id, authUser.id));
+        }
+        else {
+            dispatch(asyncUpVoteThreadDetail(threadDetail.id, authUser.id));
         }
     };
 
     const onThreadDownVoteClick = () => {
-        if (isThreadUpVoted) {
-            dispatch(asyncNeutralizeThreadVote(id));
-        }
         if (isThreadDownVoted) {
-            dispatch(asyncNeutralizeThreadVote(id));
+            dispatch(asyncNeutralizeThreadDetailVote(threadDetail.id, authUser.id));
         } else {
-            dispatch(asyncDownVoteThread(id));
+            dispatch(asyncDownVoteThreadDetail(threadDetail.id, authUser.id));
         }
     };
+
+    const onCommentUpVoteClick = (commentId, isCommentUpVoted) => {
+
+        if (isCommentUpVoted) {
+            dispatch(asyncNeutralizeCommentVote(threadDetail.id, commentId, authUser.id));
+        } else {
+            dispatch(asyncUpVoteComment(threadDetail.id, commentId, authUser.id));
+        }
+    }
+
+    const onCommentDownVoteClick = (commentId, isCommentDownVoted) => {
+        if (isCommentDownVoted) {
+            dispatch(asyncNeutralizeCommentVote(threadDetail.id, commentId, authUser.id));
+        } else {
+            dispatch(asyncDownVoteComment(threadDetail.id, commentId, authUser.id));
+        }
+    }
 
     useEffect(() => {
         dispatch(asyncGetAuthUser());
@@ -102,28 +116,6 @@ function DetailThread() {
                         const isCommentUpVoted = comment.upVotesBy.includes(authUser.id);
                         const isCommentDownVoted = comment.downVotesBy.includes(authUser.id);
 
-                        const onCommentUpVoteClick = () => {
-                            if (isCommentDownVoted) {
-                                dispatch(asyncNeutralizeCommentVote(id, comment.id));
-                            }
-                            if (isCommentUpVoted) {
-                                dispatch(asyncNeutralizeCommentVote(id, comment.id));
-                            } else {
-                                dispatch(asyncUpVoteComment(id, comment.id, authUser.id));
-                            }
-                        };
-
-                        const onCommentDownVoteClick = () => {
-                            if (isCommentUpVoted) {
-                                dispatch(asyncNeutralizeCommentVote(id, comment.id));
-                            }
-                            if (isCommentDownVoted) {
-                                dispatch(asyncNeutralizeCommentVote(id, comment.id));
-                            } else {
-                                dispatch(asyncDownVoteComment(id, comment.id));
-                            }
-                        };
-
                         return (
                             <div key={comment.id} className="bg-white rounded-lg shadow p-4">
                                 <div className="flex items-center space-x-3 mb-4">
@@ -136,7 +128,7 @@ function DetailThread() {
                                 <p className="text-gray-700 mb-4">{comment.content}</p>
                                 <div className="flex items-center space-x-4 text-gray-500">
                                     <button
-                                        onClick={onCommentUpVoteClick}
+                                        onClick={() => onCommentUpVoteClick(comment.id, isCommentUpVoted)}
                                         className={`flex items-center space-x-2 ${isCommentUpVoted ? 'text-blue-500' : ''}`}
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +137,7 @@ function DetailThread() {
                                         <span>{comment.upVotesBy.length} upvotes</span>
                                     </button>
                                     <button
-                                        onClick={onCommentDownVoteClick}
+                                        onClick={() => onCommentDownVoteClick(comment.id, isCommentDownVoted)}
                                         className={`flex items-center space-x-2 ${isCommentDownVoted ? 'text-red-500' : ''}`}
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

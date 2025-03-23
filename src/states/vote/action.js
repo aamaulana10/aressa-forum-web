@@ -1,5 +1,6 @@
 import api from "../../service/api";
 import { getAllThreadActionCreator } from "../threads/action";
+import { getThreadDetailActionCreator } from "../threadDetail/action";
 
 const ActionType = {
     UP_VOTE_THREAD: 'UP_VOTE_THREAD',
@@ -72,30 +73,52 @@ function neutralizeCommentVoteActionCreator(threadId, commentId, userId) {
     };
 }
 
-function asyncUpVoteThread(threadId, userId) {
+function asyncUpVoteThread(threadId, userId,) {
     return async (dispatch) => {
-        // Optimistic update
         dispatch(upVoteThreadActionCreator(threadId, userId));
         try {
             await api.upVoteThread(threadId);
             const threads = await api.getAllThreads();
             dispatch(getAllThreadActionCreator(threads));
         } catch (error) {
-            // Revert on failure
             alert(error.message);
         }
     };
 }
+
+function asyncUpVoteThreadDetail(threadId, userId) {
+    return async (dispatch) => {
+        dispatch(upVoteThreadActionCreator(threadId, userId));
+        try {
+            await api.upVoteThread(threadId);
+            const threadDetail = await api.getThreadDetail(threadId);
+            dispatch(getThreadDetailActionCreator(threadDetail));
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+}
+
 function asyncDownVoteThread(threadId, userId) {
     return async (dispatch) => {
-        // Optimistic update
         dispatch(downVoteThreadActionCreator(threadId, userId));
         try {
             await api.downVoteThread(threadId);
-            const threads = await api.getAllThreads();
+            const threads = await api.getAllThreads()
             dispatch(getAllThreadActionCreator(threads));
         } catch (error) {
-            // Revert on failure
+            alert(error.message);
+        }
+    };
+}
+function asyncDownVoteThreadDetail(threadId, userId) {
+    return async (dispatch) => {
+        dispatch(downVoteThreadActionCreator(threadId, userId));
+        try {
+            await api.downVoteThread(threadId);
+            const threadDetail = await api.getThreadDetail(threadId);
+            dispatch(getThreadDetailActionCreator(threadDetail));
+        } catch (error) {
             alert(error.message);
         }
     };
@@ -103,13 +126,12 @@ function asyncDownVoteThread(threadId, userId) {
 
 function asyncUpVoteComment(threadId, commentId, userId) {
     return async (dispatch) => {
-        // Optimistic update
         dispatch(upVoteCommentActionCreator(threadId, commentId, userId));
-
         try {
             await api.upVoteComment(threadId, commentId);
+            const threadDetail = await api.getThreadDetail(threadId);
+            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
-            // Revert on failure
             alert(error.message);
         }
     };
@@ -117,12 +139,12 @@ function asyncUpVoteComment(threadId, commentId, userId) {
 
 function asyncDownVoteComment(threadId, commentId, userId) {
     return async (dispatch) => {
-        // Optimistic update
         dispatch(downVoteCommentActionCreator(threadId, commentId, userId));
         try {
             await api.downVoteComment(threadId, commentId);
+            const threadDetail = await api.getThreadDetail(threadId);
+            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
-            // Revert on failure
             alert(error.message);
         }
     };
@@ -141,11 +163,26 @@ function asyncNeutralizeThreadVote(threadId, userId) {
     };
 }
 
+function asyncNeutralizeThreadDetailVote(threadId, userId) {
+    return async (dispatch) => {
+        dispatch(neutralizeThreadVoteActionCreator(threadId, userId));
+        try {
+            await api.neutralizeThreadVote(threadId);
+            const threadDetail = await api.getThreadDetail(threadId)
+            dispatch(getThreadDetailActionCreator(threadDetail));
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+}
+
 function asyncNeutralizeCommentVote(threadId, commentId, userId) {
     return async (dispatch) => {
         dispatch(neutralizeCommentVoteActionCreator(threadId, commentId, userId));
         try {
             await api.neutralizeCommentVote(threadId, commentId);
+            const threadDetail = await api.getThreadDetail(threadId);
+            dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
         }
@@ -162,8 +199,11 @@ export {
     neutralizeCommentVoteActionCreator,
     asyncUpVoteThread,
     asyncDownVoteThread,
+    asyncUpVoteThreadDetail,
+    asyncDownVoteThreadDetail,
     asyncUpVoteComment,
     asyncDownVoteComment,
     asyncNeutralizeThreadVote,
+    asyncNeutralizeThreadDetailVote,
     asyncNeutralizeCommentVote
 }
