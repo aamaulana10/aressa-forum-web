@@ -1,4 +1,4 @@
-function InfoPanel() {
+function InfoPanel(upcomingEvents, groups, contacts) {
     return (
         <div className="hidden lg:block w-80 p-6 space-y-8">
             {/* Upcoming Events */}
