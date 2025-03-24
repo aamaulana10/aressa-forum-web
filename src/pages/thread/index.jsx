@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncCreateThread, asyncGetAllThreads } from '../../states/threads/action';
 import ThreadList from '../../components/ThreadList';
 import ThreadInput from '../../components/ThreadInput';
+import CategoryFilter from '../../components/CategoryFilter';
 
 
 function ThreadPage() {
@@ -11,6 +12,7 @@ function ThreadPage() {
     } = useSelector((states) => states)
 
     const dispatch = useDispatch();
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
     useEffect(() => {
         dispatch(asyncGetAllThreads())
@@ -26,7 +28,8 @@ function ThreadPage() {
 
             <div className="flex-1">
                 <ThreadInput createThread={onCreateThread} />
-                <ThreadList threads={threads} />
+                <CategoryFilter threads={threads} onCategorySelect={setSelectedCategories} />
+                <ThreadList threads={selectedCategories.length > 0 ? threads.filter(thread => selectedCategories.includes(thread.category)) : threads} />
             </div>
 
         </div >
