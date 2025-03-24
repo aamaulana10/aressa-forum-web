@@ -8,6 +8,7 @@ import ThreadPage from './pages/thread';
 import DetailThread from './pages/thread-detail';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import Layout from './pages/layout';
+import LeaderboardPage from './pages/leaderboard';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<ThreadPage />} />
             <Route path="/threads/:id" element={<DetailThread />} />
+            <Route path="/leaderboard" element={<LeaderboardPage />} />
           </Route>
         </Routes>
       </div>
