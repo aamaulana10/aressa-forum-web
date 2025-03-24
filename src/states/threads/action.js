@@ -29,11 +29,12 @@ function asyncCreateThread({ title, body, category }) {
     return async (dispatch) => {
         dispatch(showLoading());
         try {
-            const threads = await api.createThread({
+            await api.createThread({
                 title: title,
                 body: body,
                 category: category,
             });
+            const threads = await api.getAllThreads();
             dispatch(getAllThreadActionCreator(threads));
         } catch (error) {
             alert(error.message);

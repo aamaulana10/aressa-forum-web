@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import ThreadPage from './pages/thread';
 import DetailThread from './pages/thread-detail';
 import { asyncPreloadProcess } from './states/isPreload/action';
+import Layout from './pages/layout';
 
 function App() {
 
@@ -44,12 +45,13 @@ function App() {
     <>
       <LoadingBar style={{ backgroundColor: '#2563eb', height: '3px' }} />
       <div className="app-container">
-        <main>
-          <Routes>
+        <Routes>
+          {/* Gunakan Layout sebagai Parent Route */}
+          <Route element={<Layout />}>
             <Route path="/" element={<ThreadPage />} />
             <Route path="/threads/:id" element={<DetailThread />} />
-          </Routes>
-        </main>
+          </Route>
+        </Routes>
       </div>
     </>
   );

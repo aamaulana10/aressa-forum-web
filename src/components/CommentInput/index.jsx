@@ -3,32 +3,42 @@ import { useState } from 'react';
 function CommentInput({ createComment }) {
     const [content, setContent] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!content.trim()) return;
+    function onContentChange({ target }) {
+        setContent(target.value);
+    }
+
+    function onSubmit() {
+        if (!content) {
+            return;
+        }
 
         createComment(content);
         setContent('');
-    };
+    }
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-4 mb-6">
-            <textarea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="Write your comment..."
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px] resize-none"
-            />
-            <div className="flex justify-end mt-3">
-                <button
-                    type="submit"
-                    disabled={!content.trim()}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                >
-                    Submit Comment
-                </button>
+        <div className="mb-6">
+            <div className="bg-white rounded-lg border border-gray-100 p-4">
+                <textarea
+                    className="w-full p-3 mb-4 bg-gray-50 rounded-lg border-0 focus:ring-2 focus:ring-[#7857ED] focus:bg-white transition-all duration-200 placeholder-gray-400"
+                    rows="4"
+                    placeholder="Write your comment here..."
+                    value={content}
+                    onChange={onContentChange}
+                />
+                <div className="flex justify-end">
+                    <button
+                        className="px-4 py-2 bg-[#7857ED] text-white rounded-lg hover:bg-[#6745D8] transition-all duration-200 flex items-center gap-2"
+                        onClick={onSubmit}
+                    >
+                        <span>Submit</span>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </form>
+        </div>
     );
 }
 

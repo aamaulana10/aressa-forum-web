@@ -1,10 +1,12 @@
 import ThreadItem from "../ThreadItem";
 
 function ThreadList({ threads }) {
+    console.log('threads ', threads);
+
     return (
         <div className="space-y-6">
             {
-                threads.map((thread) => (
+                threads && threads.map((thread) => (
                     <ThreadItem key={thread.id} thread={thread} />
                 ))
             }
