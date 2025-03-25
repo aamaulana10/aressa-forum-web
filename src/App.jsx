@@ -31,7 +31,7 @@ function App() {
   if (authUser === null) {
     return (
       <>
-        <LoadingBar style={{ backgroundColor: '#2563eb', height: '3px' }} />
+        <LoadingBar style={{ backgroundColor: '#2563eb', height: '3px', position: 'fixed', top: 0, left: 0, right: 0, zIndex: 99999 }} />
         <main>
           <Routes>
             <Route path="/*" element={<LoginPage />} />
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <>
-      <LoadingBar style={{ backgroundColor: '#2563eb', height: '3px' }} />
+      <LoadingBar style={{ backgroundColor: '#2563eb', height: '3px', position: 'fixed', top: 0, left: 0, right: 0, zIndex: 99999 }} />
       <div className="app-container">
         <Routes>
           {/* Gunakan Layout sebagai Parent Route */}
