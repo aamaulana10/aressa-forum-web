@@ -16,33 +16,41 @@ function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-md w-96">
-                <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
-                <form className="space-y-4" onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-2 border rounded-md"
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-2 border rounded-md"
-                    />
+        <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
+            <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md transform transition-all hover:shadow-xl">
+                <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">Welcome Back</h1>
+                <form className="space-y-6" onSubmit={onSubmit}>
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700">Email</label>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-gray-100 focus:bg-white"
+                            required
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700">Password</label>
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-gray-100 focus:bg-white"
+                            required
+                        />
+                    </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+                        className="w-full bg-[#7857ED] text-white p-3 rounded-lg hover:bg-[#6445d6] transform transition-all duration-200 hover:scale-[1.02] hover:shadow-lg font-medium"
                     >
-                        Login
+                        Sign In
                     </button>
                 </form>
-                <p className="text-center mt-4">
-                    Not registered? <a href="/register" className="text-blue-500">Register here</a>
+                <p className="text-center mt-6 text-gray-600">
+                    Don't have an account? <a href="/register" className="text-purple-600 hover:text-blue-700 font-medium">Register here</a>
                 </p>
             </div>
         </div>
