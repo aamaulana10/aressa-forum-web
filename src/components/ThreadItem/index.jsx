@@ -46,7 +46,7 @@ function ThreadItem({ thread }) {
     return (
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition-all duration-300">
             <div className="flex items-center space-x-4 mb-5">
-                <Avatar name={thread.owner} />
+                <Avatar name={thread.owner.name} />
                 <div>
                     <h3 className="font-semibold text-gray-800">{thread.ownerId}</h3>
                     <p className="text-sm text-gray-500">{createdAt}</p>

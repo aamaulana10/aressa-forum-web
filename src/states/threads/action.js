@@ -34,8 +34,15 @@ function asyncCreateThread({ title, body, category }) {
                 body: body,
                 category: category,
             });
-            const threads = await api.getAllThreads();
-            dispatch(getAllThreadActionCreator(threads));
+            const [threads, users] = await Promise.all([
+                api.getAllThreads(),
+                api.getAllUsers()
+            ]);
+            const threadsWithOwner = threads.map(thread => ({
+                ...thread,
+                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+            }));
+            dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
             alert(error.message);
         } finally {
@@ -48,8 +55,15 @@ function asyncGetAllThreads() {
     return async (dispatch) => {
         dispatch(showLoading());
         try {
-            const threads = await api.getAllThreads();
-            dispatch(getAllThreadActionCreator(threads));
+            const [threads, users] = await Promise.all([
+                api.getAllThreads(),
+                api.getAllUsers()
+            ]);
+            const threadsWithOwner = threads.map(thread => ({
+                ...thread,
+                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+            }));
+            dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
             alert(error.message);
         } finally {

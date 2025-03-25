@@ -17,6 +17,9 @@ function ThreadPage() {
     useEffect(() => {
         dispatch(asyncGetAllThreads())
 
+        console.log('thread ', threads);
+
+
     }, [dispatch])
 
     return (

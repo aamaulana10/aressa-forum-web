@@ -25,7 +25,7 @@ function CategoryFilter({ threads, onCategorySelect }) {
                         key={category}
                         onClick={() => handleCategoryClick(category)}
                         className={`px-3 py-1 rounded-full text-sm ${selectedCategories.includes(category)
-                            ? 'bg-blue-500 text-white'
+                            ? 'bg-purple-600 text-white'
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                     >
                         #{category}
