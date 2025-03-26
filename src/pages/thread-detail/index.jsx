@@ -15,6 +15,7 @@ import {
     asyncUpVoteThreadDetail
 } from '../../states/vote/action';
 import Avatar from '../../components/Avatar';
+import { sanitizeHtml } from '../../utils/sanitizeHtml';
 
 function DetailThread() {
     const { id } = useParams();
@@ -85,7 +86,10 @@ function DetailThread() {
                 </div>
 
                 <h1 className="text-3xl font-bold mb-4 text-gray-900">{threadDetail.title}</h1>
-                <p className="text-gray-600 mb-6 leading-relaxed text-lg">{threadDetail.body}</p>
+                <div
+                    className="text-gray-600 mb-6 leading-relaxed text-lg"
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(threadDetail.body) }}
+                />
 
                 <div className="flex items-center space-x-4">
                     <button
@@ -128,7 +132,10 @@ function DetailThread() {
                                         <p className="text-sm text-gray-500">{formatDate(comment.createdAt)}</p>
                                     </div>
                                 </div>
-                                <p className="text-gray-600 mb-4 leading-relaxed">{comment.content}</p>
+                                <div
+                                    className="text-gray-600 mb-4 leading-relaxed"
+                                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(comment.content) }}
+                                />
                                 <div className="flex items-center space-x-3">
                                     <button
                                         onClick={() => onCommentUpVoteClick(comment.id, isCommentUpVoted)}

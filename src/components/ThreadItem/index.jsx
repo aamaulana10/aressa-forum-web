@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { asyncDownVoteThread, asyncNeutralizeThreadVote, asyncUpVoteThread } from '../../states/vote/action';
 import { useDispatch } from 'react-redux';
 import Avatar from '../Avatar';
+import { sanitizeHtml } from '../../utils/sanitizeHtml';
 
 function ThreadItem({ thread }) {
     const navigate = useNavigate();
@@ -48,13 +49,16 @@ function ThreadItem({ thread }) {
             <div className="flex items-center space-x-4 mb-5">
                 <Avatar name={thread.owner.name} />
                 <div>
-                    <h3 className="font-semibold text-gray-800">{thread.ownerId}</h3>
+                    <h3 className="font-semibold text-gray-800">{thread.owner.name}</h3>
                     <p className="text-sm text-gray-500">{createdAt}</p>
                 </div>
             </div>
             <div className="mb-4 cursor-pointer transform hover:scale-[1.01] transition-transform duration-200" role='button' tabIndex={0} onClick={onThreadClick} onKeyDown={onThreadPress}>
                 <h2 className="text-2xl font-bold mb-3 text-gray-900 hover:text-[#7857ED] transition-colors">{thread.title}</h2>
-                <p className="mb-3 text-gray-600 line-clamp-2 leading-relaxed">{thread.body}</p>
+                <div
+                    className="mb-3 text-gray-600 line-clamp-2 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(thread.body) }}
+                />
                 <span className="inline-block bg-[#7857ED] text-white rounded-full px-4 py-1.5 text-sm font-medium shadow-sm hover:bg-[#6745D8] transition-colors">
                     #{thread.category}
                 </span>
