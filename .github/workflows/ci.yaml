@@ -28,5 +28,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install cypress
+        run: pnpm install cypress --save-dev
+
       - name: Start server and run tests
         run: pnpm run ci:test
