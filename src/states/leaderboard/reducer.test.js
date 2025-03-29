@@ -7,9 +7,9 @@
  *
  */
 
-import { describe } from "vitest";
-import leaderboardReducer from "./reducer";
-import { expect, it } from "vitest";
+import { describe } from 'vitest';
+import leaderboardReducer from './reducer';
+import { expect, it } from 'vitest';
 
 describe('leaderboardReducer function', () => {
     it('should return the initial state when given by unknown action', () => {
@@ -42,10 +42,10 @@ describe('leaderboardReducer function', () => {
                     }
                 ]
             }
-        }
+        };
         // action
         const nextState = leaderboardReducer(initialState, action);
         // assert
         expect(nextState).toEqual(action.payload.leaderboard);
-    })
-})
+    });
+});
