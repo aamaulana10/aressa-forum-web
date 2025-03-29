@@ -5,6 +5,6 @@ const usersReducer = (users = [], action = {}) => {
         default:
             return users;
     }
-}
+};
 
 export default usersReducer;

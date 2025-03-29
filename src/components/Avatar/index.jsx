@@ -1,3 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+Avatar.propTypes = {
+    name: PropTypes.string
+};
 function Avatar({ name }) {
     const getInitials = (name) => {
         if (!name) return '';

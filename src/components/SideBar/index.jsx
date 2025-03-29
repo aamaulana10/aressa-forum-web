@@ -1,5 +1,10 @@
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
+SideBar.propTypes = {
+    isOpen: PropTypes.bool,
+};
 function SideBar({ isOpen }) {
     return (
         <aside className={`h-full w-64 fixed bg-white shadow-xl transition-all duration-500 ease-in-out transform ${isOpen ? 'w-64 translate-x-0' : 'w-0 -translate-x-full'} border-r border-gray-100`}>

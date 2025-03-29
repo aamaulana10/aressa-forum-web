@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { React, useState } from 'react';
+
+CategoryFilter.propTypes = {
+    threads: PropTypes.array,
+    onCategorySelect: PropTypes.func,
+};
 
 function CategoryFilter({ threads, onCategorySelect }) {
     const [selectedCategories, setSelectedCategories] = useState([]);
 
     // Extract unique categories from threads
-    const categories = [...new Set(threads.map(thread => thread.category))];
+    const categories = [...new Set(threads.map((thread) => thread.category))];
 
     const handleCategoryClick = (category) => {
         const isSelected = selectedCategories.includes(category);
         const newCategories = isSelected
-            ? selectedCategories.filter(cat => cat !== category)
+            ? selectedCategories.filter((cat) => cat !== category)
             : [...selectedCategories, category];
 
         setSelectedCategories(newCategories);

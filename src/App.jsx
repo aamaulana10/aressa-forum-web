@@ -1,9 +1,9 @@
-import { Route, Routes } from 'react-router-dom'
-import LoginPage from './pages/login'
-import RegisterPage from './pages/register'
+import { Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/login';
+import RegisterPage from './pages/register';
 import { useSelector, useDispatch } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
-import { useEffect } from 'react';
+import { React, useEffect } from 'react';
 import ThreadPage from './pages/thread';
 import DetailThread from './pages/thread-detail';
 import { asyncPreloadProcess } from './states/isPreload/action';
@@ -59,4 +59,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

@@ -1,8 +1,12 @@
-import ThreadItem from "../ThreadItem";
+import React from 'react';
+import ThreadItem from '../ThreadItem';
+import PropTypes from 'prop-types';
+
+ThreadList.propTypes = {
+    threads: PropTypes.array,
+};
 
 function ThreadList({ threads }) {
-    console.log('threads ', threads);
-
     return (
         <div className="space-y-6 overflow-y-auto h-[calc(100vh-200px)] pb-8">
             {

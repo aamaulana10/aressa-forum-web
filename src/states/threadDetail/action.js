@@ -1,5 +1,5 @@
-import { hideLoading, showLoading } from "react-redux-loading-bar";
-import api from "../../service/api";
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import api from '../../service/api';
 
 const ActionType = {
     GET_THREAD_DETAIL: 'GET_THREAD_DETAIL',

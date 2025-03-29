@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
 import { useSelector } from 'react-redux';
@@ -5,6 +6,11 @@ import { asyncDownVoteThread, asyncNeutralizeThreadVote, asyncUpVoteThread } fro
 import { useDispatch } from 'react-redux';
 import Avatar from '../Avatar';
 import { sanitizeHtml } from '../../utils/sanitizeHtml';
+import PropTypes from 'prop-types';
+
+ThreadItem.propTypes = {
+    thread: PropTypes.object,
+};
 
 function ThreadItem({ thread }) {
     const navigate = useNavigate();

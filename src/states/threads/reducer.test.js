@@ -8,10 +8,10 @@
 *
 */
 
-import { describe } from "vitest";
-import threadsReducer from "./reducer";
-import { expect } from "vitest";
-import { it } from "vitest";
+import { describe } from 'vitest';
+import threadsReducer from './reducer';
+import { expect } from 'vitest';
+import { it } from 'vitest';
 
 describe('threadsReducer function', () => {
     it('should return the initial state when given by unknown action', () => {
@@ -42,16 +42,16 @@ describe('threadsReducer function', () => {
                         ownerId: 'users-1',
                         upVotesBy: [],
                         downVotesBy: [],
-                        totalComments: 0            
+                        totalComments: 0
                     }
                 ]
             }
-        }
+        };
         // action
         const nextState = threadsReducer(initialState, action);
         // assert
         expect(nextState).toEqual(action.payload.threads);
-    })
+    });
 
     it('should return the threads with the new thread when given by CREATE_THREAD action', () => {
         // arrange
@@ -67,7 +67,7 @@ describe('threadsReducer function', () => {
                 downVotesBy: [],
                 totalComments: 0
             }
-        ]
+        ];
         const action = {
             type: 'CREATE_THREAD',
             payload: {
@@ -83,10 +83,10 @@ describe('threadsReducer function', () => {
                     totalComments: 0
                 }
             }
-        }
+        };
         // action
         const nextState = threadsReducer(initialState, action);
         // assert
-        expect(nextState).toEqual([action.payload.thread,...initialState]);
-    })
-})
+        expect(nextState).toEqual([action.payload.thread, ...initialState]);
+    });
+});

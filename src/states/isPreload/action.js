@@ -27,7 +27,7 @@ function asyncPreloadProcess() {
             }
         } catch (error) {
             // fallback process
-            console.log(error.message)
+            console.log(error.message);
             dispatch(setAuthUserActionCreator(null));
         } finally {
             // end preload process

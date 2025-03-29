@@ -1,5 +1,11 @@
-import { useState } from "react";
+import PropTypes from 'prop-types';
+import { React, useState } from 'react';
 
+CreateThreadModal.propTypes = {
+    isOpen: PropTypes.bool,
+    onClose: PropTypes.func,
+    createThread: PropTypes.func,
+};
 function CreateThreadModal({ isOpen, onClose, createThread }) {
     const [hasError, setHasError] = useState(false);
     const [title, setTitle] = useState('');

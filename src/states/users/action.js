@@ -1,9 +1,9 @@
-import { hideLoading, showLoading } from "react-redux-loading-bar";
-import api from "../../service/api";
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import api from '../../service/api';
 
 const actionType = {
     GET_ALL_USERS: 'GET_ALL_USERS',
-}
+};
 
 function getAllUsersActionCreator(users) {
     return {
@@ -11,7 +11,7 @@ function getAllUsersActionCreator(users) {
         payload: {
             users,
         }
-    }
+    };
 }
 
 function asyncGetAllUsers() {
@@ -25,11 +25,11 @@ function asyncGetAllUsers() {
         } finally {
             dispatch(hideLoading());
         }
-    }
+    };
 }
 
 export {
     actionType,
     getAllUsersActionCreator,
     asyncGetAllUsers,
-}
+};

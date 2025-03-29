@@ -6,10 +6,10 @@
  *  - should dispatch action and call alert correctly when data fetching failed
  */
 
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import api from "../../service/api";
-import { showLoading, hideLoading } from "react-redux-loading-bar";
-import { asyncGetThreadDetail, getThreadDetailActionCreator } from "./action";
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import api from '../../service/api';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import { asyncGetThreadDetail, getThreadDetailActionCreator } from './action';
 
 const fakeThreadDetailResponse = [
     {
@@ -19,15 +19,15 @@ const fakeThreadDetailResponse = [
         category: 'General',
         createdAt: '2021-06-21T07:00:00.000Z',
         owner: {
-            id: "users-1",
-            name: "John Doe",
-            avatar: "https://generated-image-url.jpg"
+            id: 'users-1',
+            name: 'John Doe',
+            avatar: 'https://generated-image-url.jpg'
         },
         upVotesBy: [],
         downVotesBy: [],
         comments: [],
     }
-]
+];
 
 const fakeErrorResponse = new Error('Ups, something went wrong');
 const fakeThreadId = 'thread-1';
@@ -56,7 +56,7 @@ describe('asyncGetThreadDetail thunk', () => {
         expect(dispatch).toHaveBeenCalledWith(showLoading());
         expect(dispatch).toHaveBeenCalledWith(getThreadDetailActionCreator(fakeThreadDetailResponse));
         expect(dispatch).toHaveBeenCalledWith(hideLoading());
-    })
+    });
 
     it('should dispatch action and call alert correctly when data fetching failed', async () => {
         // arrange
@@ -72,5 +72,5 @@ describe('asyncGetThreadDetail thunk', () => {
         expect(dispatch).toHaveBeenCalledWith(showLoading());
         expect(dispatch).toHaveBeenCalledWith(hideLoading());
         expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
-    })
-})
+    });
+});

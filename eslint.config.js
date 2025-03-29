@@ -1,35 +1,34 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import airbnbBase from 'eslint-config-airbnb-base'
+import globals from 'globals';
+import { fixupPluginRules } from '@eslint/compat';
+import pluginJs from '@eslint/js';
+import pluginReact from 'eslint-plugin-react';
+import pluginHooks from 'eslint-plugin-react-hooks';
+import pluginCypress from 'eslint-plugin-cypress/flat';
+import daStyle from 'eslint-config-dicodingacademy';
 
 export default [
-  { ignores: ['dist'] },
+  { files: ['**/*.{js,mjs,cjs,jsx}'] },
+  { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
+  pluginJs.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  pluginCypress.configs.recommended,
   {
-    files: ['**/*.{js,jsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
-    },
     plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      'react-hooks': fixupPluginRules(pluginHooks)
     },
-    rules: {
-      ...js.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      ...airbnbBase.rules,
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-    },
+    rules: pluginHooks.configs.recommended.rules,
   },
-]
+  daStyle,
+  {
+    rules: {
+      'linebreak-style': 'off',
+      'no-alert': 'off',
+      'no-underscore-dangle': 'off',
+      'import/prefer-default-export': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      'react/jsx-props-no-spreading': 'off',
+      'indent': 'off'
+    }
+  },
+];
