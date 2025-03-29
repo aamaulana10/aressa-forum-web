@@ -26,7 +26,7 @@ describe('LoginInput component', () => {
     it('should handle username typing correctly', async () => {
         // Arrange
         render(<LoginInput onSubmit={() => { }} />);
-        const emailInput = await screen.getByPlaceholderText('Enter your email');
+        const emailInput = screen.getByPlaceholderText('Enter your email');
 
         // Action
         await userEvent.type(emailInput, 'emailtest');
@@ -38,7 +38,7 @@ describe('LoginInput component', () => {
     it('should handle password typing correctly', async () => {
         // Arrange
         render(<LoginInput login={() => { }} />);
-        const passwordInput = await screen.getByPlaceholderText('Enter your password');
+        const passwordInput = screen.getByPlaceholderText('Enter your password');
 
         // Action
         await userEvent.type(passwordInput, 'passwordtest');

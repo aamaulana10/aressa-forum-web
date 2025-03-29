@@ -47,7 +47,7 @@ function ThreadInput({ createThread }) {
                     </div>
                     <div className="flex justify-between items-center mt-3">
                         <div className="text-sm text-gray-500">
-                            {hasError && !title && <span>Title is required • </span>}
+                            {hasError && !title && <span>Title is required</span>}
                             {hasError && !body && <span>Content is required</span>}
                         </div>
                         <button
