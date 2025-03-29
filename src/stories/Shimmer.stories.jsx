@@ -1,7 +1,8 @@
-import Shimmer from "../components/Shimmer";
+import React from 'react';
+import Shimmer from '../components/Shimmer';
 
 export default {
-    title: "Components/Shimmer",
+    title: 'Components/Shimmer',
     component: Shimmer,
     tags: ['autodocs'],
     argTypes: {
@@ -22,25 +23,25 @@ export default {
 
 export const Default = {
     args: {
-        width: "w-full",
-        height: "h-4",
-        rounded: "rounded",
+        width: 'w-full',
+        height: 'h-4',
+        rounded: 'rounded',
     },
 };
 
 export const Circle = {
     args: {
-        width: "w-8",
-        height: "h-8",
-        rounded: "rounded-full",
+        width: 'w-8',
+        height: 'h-8',
+        rounded: 'rounded-full',
     },
 };
 
 export const Large = {
     args: {
-        width: "w-32",
-        height: "h-8",
-        rounded: "rounded-md",
+        width: 'w-32',
+        height: 'h-8',
+        rounded: 'rounded-md',
     },
 };
 

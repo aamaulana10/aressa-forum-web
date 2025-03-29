@@ -10,7 +10,7 @@
 
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../service/api';
-import { asyncGetLeaderboard, ActionType, getLeaderboardActionCreator } from './action';
+import { asyncGetLeaderboard, getLeaderboardActionCreator } from './action';
 import { describe, beforeEach, afterEach, it, expect, vi } from 'vitest';
 
 const fakeLeaderboardResponse = [
