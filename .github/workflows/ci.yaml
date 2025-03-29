@@ -29,4 +29,4 @@ jobs:
         run: pnpm install
 
       - name: Start server and run tests
-        run: pnpm run test & pnpm run e2e
+        run: pnpm run ci:test
