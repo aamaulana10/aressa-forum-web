@@ -1,5 +1,5 @@
 /**
- * skenario testing
+ * test scenario for LoginInput component
  *
  * - LoginInput component
  *   - should handle email typing correctly
