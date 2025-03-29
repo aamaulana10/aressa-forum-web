@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './../../stories/avatar.css';
 
 Avatar.propTypes = {
     name: PropTypes.string
@@ -16,25 +17,25 @@ function Avatar({ name }) {
     };
 
     const getColorClass = (name) => {
-        if (!name) return 'bg-gray-500';
+        if (!name) return 'avatar pink-purple';
 
-        const gradients = [
-            'bg-gradient-to-r from-pink-500 to-purple-500',
-            'bg-gradient-to-r from-blue-500 to-teal-500',
-            'bg-gradient-to-r from-green-500 to-emerald-500',
-            'bg-gradient-to-r from-yellow-500 to-orange-500',
-            'bg-gradient-to-r from-red-500 to-pink-500',
-            'bg-gradient-to-r from-indigo-500 to-purple-500',
-            'bg-gradient-to-r from-cyan-500 to-blue-500',
-            'bg-gradient-to-r from-violet-500 to-fuchsia-500'
+        const classes = [
+            'avatar pink-purple',
+            'avatar blue-teal',
+            'avatar green-emerald',
+            'avatar yellow-orange',
+            'avatar red-pink',
+            'avatar indigo-purple',
+            'avatar cyan-blue',
+            'avatar violet-fuchsia'
         ];
 
         const hash = name.split('').reduce((acc, char) => {
             return char.charCodeAt(0) + ((acc << 5) - acc);
         }, 0);
 
-        const index = Math.abs(hash) % gradients.length;
-        return gradients[index];
+        const index = Math.abs(hash) % classes.length;
+        return classes[index];
     };
 
     return (
