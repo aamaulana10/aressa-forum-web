@@ -1,5 +1,9 @@
-import { useState } from "react";
+import PropTypes from 'prop-types';
+import { React, useState } from 'react';
 
+ThreadInput.propTypes = {
+    createThread: PropTypes.func,
+};
 function ThreadInput({ createThread }) {
     const [hasError, setHasError] = useState(false);
     const [title, setTitle] = useState('');
@@ -64,7 +68,7 @@ function ThreadInput({ createThread }) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default ThreadInput;

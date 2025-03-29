@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { asyncSetAuthUser } from '../../states/authUser/action';
 import LoginInput from '../../components/LoginInput';
@@ -15,7 +16,7 @@ function LoginPage() {
                 <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">Welcome Back</h1>
                 <LoginInput onSubmit={onSubmit} />
                 <p className="text-center mt-6 text-gray-600">
-                    Don't have an account? <a href="/register" className="text-purple-600 hover:text-blue-700 font-medium">Register here</a>
+                    Don&apos;t have an account? <a href="/register" className="text-purple-600 hover:text-blue-700 font-medium">Register here</a>
                 </p>
             </div>
         </div>

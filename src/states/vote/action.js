@@ -1,6 +1,6 @@
-import api from "../../service/api";
-import { getAllThreadActionCreator } from "../threads/action";
-import { getThreadDetailActionCreator } from "../threadDetail/action";
+import api from '../../service/api';
+import { getAllThreadActionCreator } from '../threads/action';
+import { getThreadDetailActionCreator } from '../threadDetail/action';
 
 const ActionType = {
     UP_VOTE_THREAD: 'UP_VOTE_THREAD',
@@ -82,9 +82,9 @@ function asyncUpVoteThread(threadId, userId,) {
                 api.getAllThreads(),
                 api.getAllUsers()
             ]);
-            const threadsWithOwner = threads.map(thread => ({
+            const threadsWithOwner = threads.map((thread) => ({
                 ...thread,
-                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+                owner: users.find((user) => user.id === thread.ownerId) || thread.owner
             }));
             dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
@@ -115,9 +115,9 @@ function asyncDownVoteThread(threadId, userId) {
                 api.getAllThreads(),
                 api.getAllUsers()
             ]);
-            const threadsWithOwner = threads.map(thread => ({
+            const threadsWithOwner = threads.map((thread) => ({
                 ...thread,
-                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+                owner: users.find((user) => user.id === thread.ownerId) || thread.owner
             }));
             dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
@@ -173,9 +173,9 @@ function asyncNeutralizeThreadVote(threadId, userId) {
                 api.getAllThreads(),
                 api.getAllUsers()
             ]);
-            const threadsWithOwner = threads.map(thread => ({
+            const threadsWithOwner = threads.map((thread) => ({
                 ...thread,
-                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+                owner: users.find((user) => user.id === thread.ownerId) || thread.owner
             }));
             dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
@@ -189,7 +189,7 @@ function asyncNeutralizeThreadDetailVote(threadId, userId) {
         dispatch(neutralizeThreadVoteActionCreator(threadId, userId));
         try {
             await api.neutralizeThreadVote(threadId);
-            const threadDetail = await api.getThreadDetail(threadId)
+            const threadDetail = await api.getThreadDetail(threadId);
             dispatch(getThreadDetailActionCreator(threadDetail));
         } catch (error) {
             alert(error.message);
@@ -227,4 +227,4 @@ export {
     asyncNeutralizeThreadVote,
     asyncNeutralizeThreadDetailVote,
     asyncNeutralizeCommentVote
-}
+};

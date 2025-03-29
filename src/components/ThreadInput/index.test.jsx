@@ -9,6 +9,7 @@
  *   - should enable post button when title and body are filled
  */
 
+import React from 'react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import matchers from '@testing-library/jest-dom/matchers';
@@ -80,7 +81,7 @@ describe('ThreadInput component', () => {
         const postButton = screen.getByText('Post');
 
         // Assert
-        expect(postButton.closest('button').disabled).toBeTruthy()
+        expect(postButton.closest('button').disabled).toBeTruthy();
     });
 
     it('should enable post button when title and body are filled', () => {

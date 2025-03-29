@@ -1,11 +1,11 @@
-import { hideLoading } from "react-redux-loading-bar";
-import api from "../../service/api";
-import { showLoading } from "react-redux-loading-bar";
+import { hideLoading } from 'react-redux-loading-bar';
+import api from '../../service/api';
+import { showLoading } from 'react-redux-loading-bar';
 
 const actionType = {
     GET_ALL_THREADS: 'GET_ALL_THREADS',
     CREATE_THREAD: 'CREATE_THREAD',
-}
+};
 
 function getAllThreadActionCreator(threads) {
     return {
@@ -13,7 +13,7 @@ function getAllThreadActionCreator(threads) {
         payload: {
             threads,
         }
-    }
+    };
 }
 
 function createThreadActionCreator(thread) {
@@ -22,7 +22,7 @@ function createThreadActionCreator(thread) {
         payload: {
             thread,
         }
-    }
+    };
 }
 
 function asyncCreateThread({ title, body, category }) {
@@ -38,9 +38,9 @@ function asyncCreateThread({ title, body, category }) {
                 api.getAllThreads(),
                 api.getAllUsers()
             ]);
-            const threadsWithOwner = threads.map(thread => ({
+            const threadsWithOwner = threads.map((thread) => ({
                 ...thread,
-                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+                owner: users.find((user) => user.id === thread.ownerId) || thread.owner
             }));
             dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
@@ -48,7 +48,7 @@ function asyncCreateThread({ title, body, category }) {
         } finally {
             dispatch(hideLoading());
         }
-    }
+    };
 }
 
 function asyncGetAllThreads() {
@@ -59,9 +59,9 @@ function asyncGetAllThreads() {
                 api.getAllThreads(),
                 api.getAllUsers()
             ]);
-            const threadsWithOwner = threads.map(thread => ({
+            const threadsWithOwner = threads.map((thread) => ({
                 ...thread,
-                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+                owner: users.find((user) => user.id === thread.ownerId) || thread.owner
             }));
             dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
@@ -69,7 +69,7 @@ function asyncGetAllThreads() {
         } finally {
             dispatch(hideLoading());
         }
-    }
+    };
 }
 
 export {
@@ -78,4 +78,4 @@ export {
     createThreadActionCreator,
     asyncCreateThread,
     asyncGetAllThreads,
-}
+};

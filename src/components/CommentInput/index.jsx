@@ -1,5 +1,9 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { React, useState } from 'react';
 
+CommentInput.propTypes = {
+    createComment: PropTypes.func
+};
 function CommentInput({ createComment }) {
     const [content, setContent] = useState('');
 

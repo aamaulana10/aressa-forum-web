@@ -1,10 +1,10 @@
-import { hideLoading } from "react-redux-loading-bar";
-import { showLoading } from "react-redux-loading-bar";
-import api from "../../service/api";
+import { hideLoading } from 'react-redux-loading-bar';
+import { showLoading } from 'react-redux-loading-bar';
+import api from '../../service/api';
 
 const ActionType = {
     GET_LEADERBOARD: 'GET_LEADERBOARD',
-}
+};
 
 function getLeaderboardActionCreator(leaderboard) {
     return {
@@ -12,7 +12,7 @@ function getLeaderboardActionCreator(leaderboard) {
         payload: {
             leaderboard,
         }
-    }
+    };
 }
 
 function asyncGetLeaderboard() {
@@ -26,11 +26,11 @@ function asyncGetLeaderboard() {
         } finally {
             dispatch(hideLoading());
         }
-    }
+    };
 }
 
 export {
     ActionType,
     getLeaderboardActionCreator,
     asyncGetLeaderboard,
-}
+};

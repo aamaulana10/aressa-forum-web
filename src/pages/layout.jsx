@@ -1,11 +1,11 @@
-import { Outlet } from "react-router-dom";
-import SideBar from "../components/SideBar";
-import Header from "../components/Header";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { asyncUnsetAuthUser } from "../states/authUser/action";
-import CreateThreadModal from "../components/CreateThreadModal";
-import { asyncCreateThread } from "../states/threads/action";
+import { Outlet } from 'react-router-dom';
+import SideBar from '../components/SideBar';
+import Header from '../components/Header';
+import { React, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { asyncUnsetAuthUser } from '../states/authUser/action';
+import CreateThreadModal from '../components/CreateThreadModal';
+import { asyncCreateThread } from '../states/threads/action';
 
 const Layout = () => {
     const {

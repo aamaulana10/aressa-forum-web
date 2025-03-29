@@ -1,6 +1,10 @@
-import PropTypes from "prop-types";
-import useInput from "../../hooks/useInput";
+import React from 'react';
+import PropTypes from 'prop-types';
+import useInput from '../../hooks/useInput';
 
+LoginInput.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+};
 function LoginInput({ onSubmit }) {
     const [email, onEmailChange] = useInput('');
     const [password, onPasswordChange] = useInput('');
@@ -37,11 +41,7 @@ function LoginInput({ onSubmit }) {
                 Sign In
             </button>
         </form>
-    )
+    );
 }
-
-LoginInput.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-};
 
 export default LoginInput;

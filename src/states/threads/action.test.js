@@ -22,21 +22,21 @@ const fakeThreadResponse = [
         downVotesBy: [],
         comments: [],
     }
-]
+];
 
 const fakeUsersResponse = [
     {
         id: 'users-1',
         name: 'John Doe',
     }
-]
+];
 
 const fakeThreadsWithOwner = [
     {
         ...fakeThreadResponse[0],
         owner: fakeUsersResponse[0]
     }
-]
+];
 
 
 const fakeErrorResponse = new Error('Ups, something went wrong');
@@ -88,5 +88,5 @@ describe('asyncGetAllThreads thunk', () => {
         expect(dispatch).toHaveBeenCalledWith(showLoading());
         expect(dispatch).toHaveBeenCalledWith(hideLoading());
         expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
-    })
+    });
 });

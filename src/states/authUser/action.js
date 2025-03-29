@@ -1,4 +1,4 @@
-import api from "../../service/api";
+import api from '../../service/api';
 
 const ActionType = {
     SET_AUTH_USER: 'SET_AUTH_USER',

@@ -1,3 +1,14 @@
+import PropTypes from 'prop-types';
+import React from 'react';
+
+Header.propTypes = {
+    isOpen: PropTypes.bool,
+    setIsOpen: PropTypes.func,
+    onLogout: PropTypes.func,
+    userName: PropTypes.string,
+    onCreateThreadClick: PropTypes.func,
+};
+
 function Header({ isOpen, setIsOpen, onLogout, userName, onCreateThreadClick }) {
     return (
         <div className={`fixed ${isOpen ? 'w-[calc(100%-16rem)]' : 'w-full'} bg-white shadow-sm p-4 border-b border-gray-100`}>

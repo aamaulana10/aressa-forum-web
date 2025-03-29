@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { React, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
 import { useSelector, useDispatch } from 'react-redux';
@@ -55,7 +55,7 @@ function DetailThread() {
         } else {
             dispatch(asyncUpVoteComment(threadDetail.id, commentId, authUser.id));
         }
-    }
+    };
 
     const onCommentDownVoteClick = (commentId, isCommentDownVoted) => {
         if (isCommentDownVoted) {
@@ -63,7 +63,7 @@ function DetailThread() {
         } else {
             dispatch(asyncDownVoteComment(threadDetail.id, commentId, authUser.id));
         }
-    }
+    };
 
     useEffect(() => {
         dispatch(asyncGetAuthUser());

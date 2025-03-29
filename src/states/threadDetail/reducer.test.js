@@ -1,12 +1,12 @@
-/* 
+/*
 * test scenario for threadDetailReducer
 *
 * should return the initial state when given unknown action
 * should handle GET_THREAD_DETAIL action correctly
 */
 
-import { it, describe, expect } from "vitest";
-import threadDetailReducer from "./reducer";
+import { it, describe, expect } from 'vitest';
+import threadDetailReducer from './reducer';
 
 describe('threadDetailReducer function', () => {
     it('should return the initial state when given unknown action', () => {
@@ -19,7 +19,7 @@ describe('threadDetailReducer function', () => {
         const nextState = threadDetailReducer(initialState, action);
         // assert
         expect(nextState).toEqual(initialState);
-    })
+    });
 
     it('should handle GET_THREAD_DETAIL action correctly', () => {
         // arrange
@@ -40,13 +40,13 @@ describe('threadDetailReducer function', () => {
                     comments: [],
                 }
             }
-        }
+        };
         // action
         const nextState = threadDetailReducer(initialState, action);
         console.log('nextState', nextState);
 
         // assert
         expect(nextState).toEqual(action.payload.threadDetail);
-    })
+    });
 
-})
+});
