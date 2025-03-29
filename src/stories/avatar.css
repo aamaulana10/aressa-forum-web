@@ -1,0 +1,43 @@
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+}
+
+/* Warna Gradient Simulasi */
+.avatar.pink-purple {
+    background: linear-gradient(to right, #ec4899, #8b5cf6);
+}
+
+.avatar.blue-teal {
+    background: linear-gradient(to right, #3b82f6, #14b8a6);
+}
+
+.avatar.green-emerald {
+    background: linear-gradient(to right, #22c55e, #10b981);
+}
+
+.avatar.yellow-orange {
+    background: linear-gradient(to right, #eab308, #f97316);
+}
+
+.avatar.red-pink {
+    background: linear-gradient(to right, #ef4444, #ec4899);
+}
+
+.avatar.indigo-purple {
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+}
+
+.avatar.cyan-blue {
+    background: linear-gradient(to right, #06b6d4, #3b82f6);
+}
+
+.avatar.violet-fuchsia {
+    background: linear-gradient(to right, #8b5cf6, #d946ef);
+}
