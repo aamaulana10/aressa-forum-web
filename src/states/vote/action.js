@@ -78,8 +78,15 @@ function asyncUpVoteThread(threadId, userId,) {
         dispatch(upVoteThreadActionCreator(threadId, userId));
         try {
             await api.upVoteThread(threadId);
-            const threads = await api.getAllThreads();
-            dispatch(getAllThreadActionCreator(threads));
+            const [threads, users] = await Promise.all([
+                api.getAllThreads(),
+                api.getAllUsers()
+            ]);
+            const threadsWithOwner = threads.map(thread => ({
+                ...thread,
+                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+            }));
+            dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
             alert(error.message);
         }
@@ -104,8 +111,15 @@ function asyncDownVoteThread(threadId, userId) {
         dispatch(downVoteThreadActionCreator(threadId, userId));
         try {
             await api.downVoteThread(threadId);
-            const threads = await api.getAllThreads()
-            dispatch(getAllThreadActionCreator(threads));
+            const [threads, users] = await Promise.all([
+                api.getAllThreads(),
+                api.getAllUsers()
+            ]);
+            const threadsWithOwner = threads.map(thread => ({
+                ...thread,
+                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+            }));
+            dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
             alert(error.message);
         }
@@ -155,8 +169,15 @@ function asyncNeutralizeThreadVote(threadId, userId) {
         dispatch(neutralizeThreadVoteActionCreator(threadId, userId));
         try {
             await api.neutralizeThreadVote(threadId);
-            const threads = await api.getAllThreads();
-            dispatch(getAllThreadActionCreator(threads));
+            const [threads, users] = await Promise.all([
+                api.getAllThreads(),
+                api.getAllUsers()
+            ]);
+            const threadsWithOwner = threads.map(thread => ({
+                ...thread,
+                owner: users.find(user => user.id === thread.ownerId) || thread.owner
+            }));
+            dispatch(getAllThreadActionCreator(threadsWithOwner));
         } catch (error) {
             alert(error.message);
         }

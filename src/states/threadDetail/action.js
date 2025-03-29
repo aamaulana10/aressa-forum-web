@@ -2,7 +2,7 @@ import { hideLoading, showLoading } from "react-redux-loading-bar";
 import api from "../../service/api";
 
 const ActionType = {
-    GET_THREAD_DETAIL: 'RECEIVE_TALK_DETAIL',
+    GET_THREAD_DETAIL: 'GET_THREAD_DETAIL',
     CREATE_COMMENT: 'CREATE_COMMENT',
 };
 
@@ -29,16 +29,6 @@ function asyncGetThreadDetail(threadId) {
     };
 }
 
-function createCommentActionCreator(threadId, userId) {
-    return {
-        type: ActionType.CREATE_COMMENT,
-        payload: {
-            threadId,
-            userId,
-        },
-    };
-}
-
 function asyncCreateComment(threadId, content) {
     return async (dispatch) => {
         dispatch(showLoading());
@@ -58,6 +48,5 @@ export {
     ActionType,
     getThreadDetailActionCreator,
     asyncGetThreadDetail,
-    createCommentActionCreator,
     asyncCreateComment,
 };
