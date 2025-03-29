@@ -28,5 +28,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Start server and run E2E tests
-        run: pnpm run dev & pnpm run ci:test
+      - name: Start server and run tests
+        run: pnpm run ci:test
