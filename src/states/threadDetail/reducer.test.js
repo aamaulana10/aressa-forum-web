@@ -43,7 +43,6 @@ describe('threadDetailReducer function', () => {
         };
         // action
         const nextState = threadDetailReducer(initialState, action);
-        console.log('nextState', nextState);
 
         // assert
         expect(nextState).toEqual(action.payload.threadDetail);

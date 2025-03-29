@@ -1,5 +1,5 @@
 /**
- * skenario testing
+ * test scenario for ThreadItem component
  *
  * - ThreadItem component
  *   - should render thread item correctly

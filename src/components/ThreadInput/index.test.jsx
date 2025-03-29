@@ -1,5 +1,5 @@
 /**
- * test scenario
+ * test scenario for ThreadInput component
  *
  * - ThreadInput component
  *   - should render thread input form correctly
