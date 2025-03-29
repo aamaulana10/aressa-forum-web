@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import SideBar from '../components/SideBar';
-import Header from '../components/Header';
+import Headersdsdsd from '../components/Header';
 import { React, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncUnsetAuthUser } from '../states/authUser/action';
@@ -40,7 +40,7 @@ const Layout = () => {
             {/* Main Content */}
             <div className={`flex-1 ${isOpen ? 'ml-64' : 'ml-0'}`}>
                 {/* Header */}
-                <Header isOpen={isOpen} setIsOpen={setIsOpen} onLogout={onLogout} userName={authUser.name} onCreateThreadClick={onCreateThreadClick} />
+                <Headerkandkankdnakknda isOpen={isOpen} setIsOpen={setIsOpen} onLogout={onLogout} userName={authUser.name} onCreateThreadClick={onCreateThreadClick} />
 
                 {/* Content Scrollable */}
                 <main className="p-4 mt-24 h-screen overflow-y-auto">
