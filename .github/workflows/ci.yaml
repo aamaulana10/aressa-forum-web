@@ -30,3 +30,6 @@ jobs:
 
       - name: Test
         run: pnpm run ci:test
+
+      - name: Start server and run E2E tests
+        run: pnpm run dev & pnpm run e2e
