@@ -5,13 +5,8 @@ function LoginInput({ onSubmit }) {
     const [email, onEmailChange] = useInput('');
     const [password, onPasswordChange] = useInput('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit({ email, password });
-    };
-
     return (
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        <form className="space-y-6">
             <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Email</label>
                 <input
@@ -35,7 +30,8 @@ function LoginInput({ onSubmit }) {
                 />
             </div>
             <button
-                type="submit"
+                type="button"
+                onClick={() => onSubmit({ email, password })}
                 className="w-full bg-[#7857ED] text-white p-3 rounded-lg hover:bg-[#6445d6] transform transition-all duration-200 hover:scale-[1.02] hover:shadow-lg font-medium"
             >
                 Sign In
